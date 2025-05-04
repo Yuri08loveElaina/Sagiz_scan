@@ -100,7 +100,7 @@ def save_results(path):
         print(f"[!] Failed to save results: {e}")
 
 def main():
-    parser = argparse.ArgumentParser(description="HackerGPT One-File VulnScanner Framework")
+    parser = argparse.ArgumentParser(description="  VulnScanner Framework")
     parser.add_argument("-u", "--url", required=True, help="Target URL")
     parser.add_argument("-m", "--mode", required=True, help="sql, xss, csrf, nuclei, fullscan")
     parser.add_argument("-payload", help="Payload file path")
