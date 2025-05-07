@@ -249,9 +249,9 @@ def main():
     parser.add_argument("--exploit", help="Exploit type: rce, lfi, upload")
     parser.add_argument("--cmd", help="Command for RCE")
     parser.add_argument("--file", help="File to read (LFI)")
- parser.add_argument("--template", help="Path to custom Nuclei templates")
-  parser.add_argument("--userlist", help="Username wordlist")
-parser.add_argument("--passlist", help="Password wordlist")
+    parser.add_argument("--template", help="Path to custom Nuclei templates")
+    parser.add_argument("--userlist", help="Username wordlist")
+    parser.add_argument("--passlist", help="Password wordlist")
  args = parser.parse_args()
 
     if args.mode == "exploit":
@@ -268,3 +268,7 @@ parser.add_argument("--passlist", help="Password wordlist")
 
 if __name__ == "__main__":
     main()
+if args.output:
+    save_results(args.output)
+
+show_summary()
