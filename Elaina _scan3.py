@@ -133,7 +133,7 @@ def run_scan(args):
         csrf_check(args.url, args.proxy)
         return
     if args.mode == "nuclei":
-    nuclei_scan(args.url)
+    nuclei_scan(args.url, args.template)
   return
     if not args.payload:
         print("[!] You must provide a --payload file for SQL/XSS modes.")
