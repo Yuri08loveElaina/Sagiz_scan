@@ -126,6 +126,10 @@ def run_cve_scan(cve_id):
         print(f"[!] Error checking CVE: {e}")
 
 def run_scan(args):
+    if args.mode == "bruteforce":
+    run_bruteforce(args.url, args.userlist, args.passlist)
+    if args.mode == "cve":
+    run_cve_scan(args.url)  # args.url là CVE ID ví dụ: CVE-2021-41773
     if args.mode == "fullscan":
         run_full_scan(args)
         return
@@ -236,7 +240,8 @@ def main():
     parser.add_argument("--exploit", help="Exploit type: rce, lfi, upload")
     parser.add_argument("--cmd", help="Command for RCE")
     parser.add_argument("--file", help="File to read (LFI)")
-    args = parser.parse_args()
+ parser.add_argument("--template", help="Path to custom Nuclei templates")
+   args = parser.parse_args()
 
     if args.mode == "exploit":
         run_exploit(args)
