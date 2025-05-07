@@ -125,6 +125,13 @@ def run_cve_scan(cve_id):
     except Exception as e:
         print(f"[!] Error checking CVE: {e}")
 
+def check_cve(cve_id):
+    url = f"https://cve.circl.lu/api/cve/{cve_id}"
+    r = requests.get(url)
+    if r.ok:
+        data = r.json()
+        print(f"[CVE] {data['id']} - {data['summary']}")
+
 def run_scan(args):
     if args.mode == "bruteforce":
     run_bruteforce(args.url, args.userlist, args.passlist)
