@@ -250,6 +250,7 @@ def main():
     parser.add_argument("--cmd", help="Command for RCE")
     parser.add_argument("--file", help="File to read (LFI)")
     parser.add_argument("--template", help="Path to custom Nuclei templates")
+    parser.add_argument("--template", help="Đường dẫn đến template tùy chỉnh của Nuclei")
     parser.add_argument("--userlist", help="Username wordlist")
     parser.add_argument("--passlist", help="Password wordlist")
  args = parser.parse_args()
