@@ -26,19 +26,13 @@ Welcome to **Sagiz_scan**, a powerful and efficient scanning tool designed to si
    ## Elaina3.py ##
 - python Elaina3.py -u "http://target.com/page.php?id=1" -m sqli --payload payloads/sqli.txt -p http://127.0.0.1:8080 -t 10
   python scanner.py -u "http://example.com/page.php?id=1" -m sql -payload payloads/sql.txt
-Quét XSS:
-
-  python scanner.py -u "http://example.com/search.php?q=test" -m xss -payload payloads/xss.txt
-Kiểm tra CSRF:
-
-  python scanner.py -u "http://example.com/form.php" -m csrf
+Quét XSS: python scanner.py -u "http://example.com/search.php?q=test" -m xss -payload payloads/xss.txt
+Kiểm tra CSRF: python scanner.py -u "http://example.com/form.php" -m csrf
 Quét với Nuclei:
 python scanner.py -u "http://example.com" -m nuclei
 Thực hiện brute-force đăng nhập:
 python scanner.py -u "http://example.com/login.php" -m bruteforce -userlist users.txt -passlist passwords.txt
 Khai thác RCE:
-
-
 Sao chép
 Chỉnh sửa
   python scanner.py -u "http://example.com/vulnerable.php?cmd=" -m exploit --exploit rce --cmd "whoami"
