@@ -28,31 +28,17 @@ Welcome to **Sagiz_scan**, a powerful and efficient scanning tool designed to si
   python scanner.py -u "http://example.com/page.php?id=1" -m sql -payload payloads/sql.txt
 Quét XSS:
 
-bash
-Sao chép
-Chỉnh sửa
   python scanner.py -u "http://example.com/search.php?q=test" -m xss -payload payloads/xss.txt
 Kiểm tra CSRF:
 
-bash
-Sao chép
-Chỉnh sửa
   python scanner.py -u "http://example.com/form.php" -m csrf
 Quét với Nuclei:
-
-bash
-Sao chép
-Chỉnh sửa
-  python scanner.py -u "http://example.com" -m nuclei
+python scanner.py -u "http://example.com" -m nuclei
 Thực hiện brute-force đăng nhập:
-
-bash
-Sao chép
-Chỉnh sửa
-  python scanner.py -u "http://example.com/login.php" -m bruteforce -userlist users.txt -passlist passwords.txt
+python scanner.py -u "http://example.com/login.php" -m bruteforce -userlist users.txt -passlist passwords.txt
 Khai thác RCE:
 
-bash
+
 Sao chép
 Chỉnh sửa
   python scanner.py -u "http://example.com/vulnerable.php?cmd=" -m exploit --exploit rce --cmd "whoami"
