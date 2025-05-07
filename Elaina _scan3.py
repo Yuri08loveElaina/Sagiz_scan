@@ -194,6 +194,15 @@ def save_results(path):
         print(f"[+] Results saved to: {path}")
     except Exception as e:
         print(f"[!] Failed to save results: {e}")
+
+def show_summary():
+    if results:
+        table = [[r.get("mode"), r.get("url"), r.get("payload", r.get("cmd", r.get("file", "-"))), "✔" if r.get("vulnerable", False) else ""] for r in results]
+        print("\n=== Scan Summary ===")
+        print(tabulate(table, headers=["Type", "URL", "Payload/File/Cmd", "Vulnerable"], tablefmt="fancy_grid"))
+    else:
+        print("[!] No vulnerabilities found.")
+
 def run_bruteforce(url, userlist, passlist):
     if not userlist or not passlist:
         print("[!] Missing wordlists.")
