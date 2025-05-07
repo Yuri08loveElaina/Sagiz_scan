@@ -19,7 +19,6 @@ Welcome to **Sagiz_scan**, a powerful and efficient scanning tool designed to si
 - git clone https://github.com/Dragontv1234/Sagiz_scan.git
 - cd Sagiz_scan
 - chmod +x ELAINA_SCAN.py
-
 ## How To Using Tools ## 
 ## ELAINA_SCAN.py ##
 - python ELAINA_SCAN.py -u "http://target.com/page.php?id=1" -m sql -payload payloads/sql.txt --fuzz-params -proxy http://127.0.0.1:8080
@@ -31,22 +30,8 @@ Kiểm tra CSRF: python scanner.py -u "http://example.com/form.php" -m csrf
 Quét với Nuclei:
 python scanner.py -u "http://example.com" -m nuclei
 Thực hiện brute-force đăng nhập:
-python scanner.py -u "http://example.com/login.php" -m bruteforce -userlist users.txt -passlist passwords.txt
-Khai thác RCE:
-Sao chép
-Chỉnh sửa
-  python scanner.py -u "http://example.com/vulnerable.php?cmd=" -m exploit --exploit rce --cmd "whoami"
-Khai thác LFI:
-
-bash
-Sao chép
-Chỉnh sửa
-  python scanner.py -u "http://example.com/vulnerable.php?file=" -m exploit --exploit lfi --file "/etc/passwd"
-Chạy toàn bộ quét:
-
-bash
-Sao chép
-Chỉnh sửa
-  python scanner.py -u "http://example.com" -m fullscan -payload payloads/all.txt
+python scanner.py -u "http://example.com/login.php" -m bruteforce -userlist users.txt -passlist passwords.txtKhai thác RCE:python scanner.py -u "http://example.com/vulnerable.php?cmd=" -m exploit --exploit rce --cmd "whoami"
+Khai thác LFI:python scanner.py -u "http://example.com/vulnerable.php?file=" -m exploit --exploit lfi --file "/etc/passwd"
+Chạy toàn bộ quétpython scanner.py -u "http://example.com" -m fullscan -payload payloads/all.txt
 
 ## Develop By YURI08 ##
