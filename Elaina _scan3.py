@@ -241,7 +241,9 @@ def main():
     parser.add_argument("--cmd", help="Command for RCE")
     parser.add_argument("--file", help="File to read (LFI)")
  parser.add_argument("--template", help="Path to custom Nuclei templates")
-   args = parser.parse_args()
+  parser.add_argument("--userlist", help="Username wordlist")
+parser.add_argument("--passlist", help="Password wordlist")
+ args = parser.parse_args()
 
     if args.mode == "exploit":
         run_exploit(args)
