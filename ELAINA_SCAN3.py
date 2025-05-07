@@ -259,6 +259,7 @@ def main():
     parser.add_argument("--template", help="Path to custom Nuclei templates")
     parser.add_argument("--userlist", help="Username wordlist")
     parser.add_argument("--passlist", help="Password wordlist")
+    parser.add_argument("--bruteforce help="Attack brute force login")
  args = parser.parse_args()
 
     if args.mode == "exploit":
