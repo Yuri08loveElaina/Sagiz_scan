@@ -68,8 +68,16 @@ def scan_payload(url, param, payload, mode, proxy):
             results.append(result)
             try_sql_dump(url, param, proxy)
 
-    elif mode == "xss" and payload.strip('<>"') in r.text:
-        print(f"[XSS] {target_url}")
+   elif mode == "xss":
+    if is_reflected(r.text, payload):
+        print(f"[XSS] Reflection detected at {target_url}")
+        result["vulnerable"] = True
+        results.append(result)
+
+
+if "sleep" in payload.lower() or "timeout" in payload.lower():
+    if check_delay(target_url, proxy):
+        print(f"[DELAY] Blind vuln suspected at {target_url}")
         result["vulnerable"] = True
         results.append(result)
 
@@ -152,6 +160,32 @@ def run_scan(args):
     payloads = load_payloads(args.payload)
     run_mode(args.mode, args.url, payloads, args.thread, args.proxy, args.fuzz_params)
 
+def detect_ssti(url, param, payloads, proxy):
+    for payload in payloads:
+        test_url = build_url(url, param, payload)
+        r = request(test_url, proxy)
+        if r and "49" in r.text:
+            print(f"[SSTI] Possible SSTI at {test_url}")
+            results.append({"mode": "ssti", "url": test_url, "payload": payload, "vulnerable": True})
+
+def detect_open_redirect(url, param, payloads, proxy):
+    for payload in payloads:
+        test_url = build_url(url, param, payload)
+        r = request(test_url, proxy)
+        if r and r.is_redirect:
+            location = r.headers.get("Location", "")
+            if "evil.com" in location:
+                print(f"[REDIRECT] Open redirect at {test_url}")
+                results.append({"mode": "redirect", "url": test_url, "location": location})
+
+def detect_ssrf(url, param, payloads, proxy):
+    for payload in payloads:
+        test_url = build_url(url, param, payload)
+        r = request(test_url, proxy)
+        if r and any(e in r.text.lower() for e in ["connection refused", "timeout", "127.0.0.1"]):
+            print(f"[SSRF] Possible SSRF at {test_url}")
+            results.append({"mode": "ssrf", "url": test_url, "payload": payload, "vulnerable": True})
+
 def run_bruteforce(url, userlist, passlist):
     if not userlist or not passlist:
         print("[!] Missing wordlists.")
@@ -169,6 +203,17 @@ def run_bruteforce(url, userlist, passlist):
                     results.append({"mode": "bruteforce", "url": url, "payload": f"{user}:{pwd}", "vulnerable": True})
             except:
                 continue
+                
+def infer_param_type(url, param):
+    parsed = list(urllib.parse.urlparse(url))
+    query = dict(urllib.parse.parse_qsl(parsed[4]))
+    val = query.get(param, "")
+    if val.isdigit(): return "int"
+    if val in ["true", "false"]: return "bool"
+    if "/" in val: return "path"
+    return "str"
+def is_reflected(response_text, payload):
+    return payload.lower() in response_text.lower()
 
 # ===== Exploit & Post Exploit =====
 
@@ -211,6 +256,7 @@ def run_post(args):
         post_exploit_rce(args.url, args.proxy)
     else:
         print("[!] Post-exploit only supports RCE.")
+
 
 def save_results(path):
     try:
