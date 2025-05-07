@@ -79,13 +79,25 @@ def csrf_check(url, proxy):
         print(f"[CSRF] Possible missing CSRF token: {url}")
         results.append({"mode": "csrf", "url": url, "vulnerable": True})
 
-def nuclei_scan(url):
+
+def nuclei_scan(url, templates=None):
+    nuclei_path = shutil.which("nuclei")
+    if not nuclei_path:
+        print("[!] Nuclei not found in PATH. Install it from https://nuclei.projectdiscovery.io")
+        return
     try:
         print(f"[NUCLEI] Scanning {url}...")
-        subprocess.run(["nuclei", "-u", url], check=True)
+        templates_dir = os.path.expanduser("~/.local/nuclei-templates")
+        if not os.path.isdir(templates_dir):
+            print("[*] Nuclei templates not found. Updating...")
+            subprocess.run(["nuclei", "-update-templates"], check=True)
+        cmd = ["nuclei", "-u", url]
+        if templates:
+            cmd += ["-t", templates]
+        subprocess.run(cmd, check=True)
     except Exception as e:
         print(f"[!] Nuclei error: {e}")
-
+        
 def run_mode(mode, url, payloads, threads, proxy, fuzz_all):
     params = parse_params(url)
     targets = params if fuzz_all else params[:1]
@@ -121,8 +133,8 @@ def run_scan(args):
         csrf_check(args.url, args.proxy)
         return
     if args.mode == "nuclei":
-        nuclei_scan(args.url)
-        return
+    nuclei_scan(args.url)
+  return
     if not args.payload:
         print("[!] You must provide a --payload file for SQL/XSS modes.")
         return
