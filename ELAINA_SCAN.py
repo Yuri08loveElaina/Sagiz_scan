@@ -1,17 +1,21 @@
-import argparse, requests, urllib.parse, concurrent.futures, subprocess, json, colorama
+import random, argparse, requests, urllib.parse, concurrent.futures, subprocess, json, colorama
 from concurrent.futures import ThreadPoolExecutor
 from colorama import init, Fore, Style
 
 results = []
-  print("""
+def banner():
+    colors = [Fore.RED, Fore.GREEN, Fore.YELLOW, Fore.BLUE, Fore.MAGENTA, Fore.CYAN]
+    color = random.choice(colors)
+    print(color + Style.BRIGHT + """
  ███████╗██╗      █████╗ ██╗███╗   ██╗ █████╗     ███████╗ ██████╗ █████╗ ███╗   ██╗
  ██╔════╝██║     ██╔══██╗██║████╗  ██║██╔══██╗    ██╔════╝██╔════╝██╔══██╗████╗  ██║
  █████╗  ██║     ███████║██║██╔██╗ ██║███████║    ███████╗██║     ███████║██╔██╗ ██║
  ██╔══╝  ██║     ██╔══██║██║██║╚██╗██║██╔══██║    ╚════██║██║     ██╔══██║██║╚██╗██║
  ███████╗███████╗██║  ██║██║██║ ╚████║██║  ██║    ███████║╚██████╗██║  ██║██║ ╚████║
  ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝    ╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═══╝
-                            Web Vuln Scanner - by YURI08
+                        Web Vulnerability Scanner - by YURI08
 """)
+  
 def print_result(msg, level="info"):
     color = {
         "info": Fore.CYAN,
