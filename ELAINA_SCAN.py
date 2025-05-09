@@ -18,16 +18,21 @@ def banner():
   
 def print_result(msg, level="info"):
     color = {
-        "info": Fore.CYAN,
-        "success": Fore.GREEN,
-        "warn": Fore.YELLOW,
-        "error": Fore.RED + Style.BRIGHT  # Tô đậm dòng lỗi
-    }.get(level, Fore.WHITE)
+def print_result(msg, level="info"):
+    level_colors = {
+        "info": Fore.CYAN + Style.BRIGHT,
+        "success": Fore.GREEN + Style.BRIGHT,
+        "warn": Fore.YELLOW + Style.BRIGHT,
+        "error": Fore.RED + Style.BRIGHT
+    }
+    color = level_colors.get(level, Fore.WHITE + Style.BRIGHT)
     tag = f"[{level.upper()}]"
+
     if level == "error":
-        print(f"{color}{'=' * (len(msg) + len(tag) + 3)}")
+        line = "=" * (len(msg) + len(tag) + 3)
+        print(f"{color}{line}")
         print(f"{color}{tag} {msg}")
-        print(f"{color}{'=' * (len(msg) + len(tag) + 3)}")
+        print(f"{color}{line}")
     else:
         print(f"{color}{tag} {msg}")
         
