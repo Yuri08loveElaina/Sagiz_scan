@@ -1,4 +1,4 @@
-import argparse, requests, urllib.parse, concurrent.futures, subprocess, json
+import argparse, requests, urllib.parse, concurrent.futures, subprocess, json, colorama
 
 results = []
 
