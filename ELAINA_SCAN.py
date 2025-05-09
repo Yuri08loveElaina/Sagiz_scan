@@ -3,7 +3,7 @@ from concurrent.futures import ThreadPoolExecutor
 from colorama import init, Fore, Style
 
 results = []
-  print("""{Fore.MAGENTA}{Style.BRIGHT}
+  print("""
  ███████╗██╗      █████╗ ██╗███╗   ██╗ █████╗     ███████╗ ██████╗ █████╗ ███╗   ██╗
  ██╔════╝██║     ██╔══██╗██║████╗  ██║██╔══██╗    ██╔════╝██╔════╝██╔══██╗████╗  ██║
  █████╗  ██║     ███████║██║██╔██╗ ██║███████║    ███████╗██║     ███████║██╔██╗ ██║
