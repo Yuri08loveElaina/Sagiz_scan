@@ -14,8 +14,8 @@ def banner():
  ██╔══╝  ██║     ██╔══██║██║██║╚██╗██║██╔══██║    ╚════██║██║     ██╔══██║██║╚██╗██║
  ███████╗███████╗██║  ██║██║██║ ╚████║██║  ██║    ███████║╚██████╗██║  ██║██║ ╚████║
  ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝    ╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═══╝
-                        Web Vulnerability Scanner - by YURI08
-""")
+                    Web Vulnerability Scanner - by YURI08
+"""   + Style.RESET_ALL)                        
     
 def print_result(msg, level="info"):
     level_colors = {
