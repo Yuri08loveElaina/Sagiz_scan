@@ -1,4 +1,6 @@
 import argparse, requests, urllib.parse, concurrent.futures, subprocess, json, colorama
+from concurrent.futures import ThreadPoolExecutor
+from colorama import init, Fore, Style
 
 results = []
 
