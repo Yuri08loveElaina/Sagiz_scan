@@ -173,6 +173,7 @@ def main():
     parser.add_argument("--exploit", help="Exploit type: rce, lfi, upload")
     parser.add_argument("--cmd", help="Command for RCE")
     parser.add_argument("--file", help="File to read (LFI)")
+    parser.add_argument("--payload", required=True, help="Payload file path")
     args = parser.parse_args()
 
     if args.mode == "exploit":
