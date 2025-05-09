@@ -3,6 +3,7 @@ from concurrent.futures import ThreadPoolExecutor
 from colorama import init, Fore, Style
 
 results = []
+
 def banner():
     colors = [Fore.RED, Fore.GREEN, Fore.YELLOW, Fore.BLUE, Fore.MAGENTA, Fore.CYAN]
     color = random.choice(colors)
@@ -32,8 +33,7 @@ def print_result(msg, level="info"):
         print(f"{color}{tag} {msg}")
         print(f"{color}{line}")
     else:
-        print(f"{color}{tag} {msg}")
-        
+        print(f"{color}{tag} {msg}") 
 def load_payloads(filepath):
     try:
         with open(filepath, 'r', encoding='utf-8') as f:
