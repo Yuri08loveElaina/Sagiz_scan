@@ -15,9 +15,7 @@ def banner():
  ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝    ╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═══╝
                         Web Vulnerability Scanner - by YURI08
 """)
-  
-def print_result(msg, level="info"):
-    color = {
+    
 def print_result(msg, level="info"):
     level_colors = {
         "info": Fore.CYAN + Style.BRIGHT,
