@@ -3,9 +3,7 @@ from concurrent.futures import ThreadPoolExecutor
 from colorama import init, Fore, Style
 
 results = []
-
-def banner():
-  BANNER = f"""{Fore.MAGENTA}{Style.BRIGHT}
+  print("""{Fore.MAGENTA}{Style.BRIGHT}
  ███████╗██╗      █████╗ ██╗███╗   ██╗ █████╗     ███████╗ ██████╗ █████╗ ███╗   ██╗
  ██╔════╝██║     ██╔══██╗██║████╗  ██║██╔══██╗    ██╔════╝██╔════╝██╔══██╗████╗  ██║
  █████╗  ██║     ███████║██║██╔██╗ ██║███████║    ███████╗██║     ███████║██╔██╗ ██║
@@ -13,7 +11,7 @@ def banner():
  ███████╗███████╗██║  ██║██║██║ ╚████║██║  ██║    ███████║╚██████╗██║  ██║██║ ╚████║
  ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝    ╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═══╝
                             Web Vuln Scanner - by YURI08
-"""
+""")
 def print_result(msg, level="info"):
     color = {
         "info": Fore.CYAN,
