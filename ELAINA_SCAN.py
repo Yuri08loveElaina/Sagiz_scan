@@ -2,6 +2,7 @@ import random, argparse, requests, urllib.parse, concurrent.futures, subprocess,
 from concurrent.futures import ThreadPoolExecutor
 from colorama import init, Fore, Style
 
+init(autoreset=True)
 results = []
 
 def banner():
