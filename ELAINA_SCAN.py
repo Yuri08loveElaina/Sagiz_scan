@@ -12,7 +12,21 @@ def banner():
  ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝    ╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═══╝
                             Web Vuln Scanner - by YURI08
 """)
-
+def print_result(msg, level="info"):
+    color = {
+        "info": Fore.CYAN,
+        "success": Fore.GREEN,
+        "warn": Fore.YELLOW,
+        "error": Fore.RED + Style.BRIGHT  # Tô đậm dòng lỗi
+    }.get(level, Fore.WHITE)
+    tag = f"[{level.upper()}]"
+    if level == "error":
+        print(f"{color}{'=' * (len(msg) + len(tag) + 3)}")
+        print(f"{color}{tag} {msg}")
+        print(f"{color}{'=' * (len(msg) + len(tag) + 3)}")
+    else:
+        print(f"{color}{tag} {msg}")
+        
 def load_payloads(filepath):
     try:
         with open(filepath, 'r', encoding='utf-8') as f:
