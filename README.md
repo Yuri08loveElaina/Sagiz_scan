@@ -45,7 +45,7 @@ python ELAINA_SCAN3.py -u "http://example.com" -m fullscan -payload payloads/all
 
 
 
-
+inurl:"subir_foto.php"
 
 
 
