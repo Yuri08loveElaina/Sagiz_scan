@@ -1,5 +1,3 @@
-# Sau khi môi trường bị reset, cần chạy lại từ đầu để tạo lại file payloads
-
 # Tạo lại danh sách các payload XSS
 base_payloads = [
     "<script>alert({})</script>",
