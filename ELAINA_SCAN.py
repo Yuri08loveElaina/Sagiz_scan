@@ -197,22 +197,7 @@ def main():
     parser.add_argument("--file", help="File to read (LFI)")
     parser.add_argument("--payload", required=True, help="Payload file path")
     args = parser.parse_args()
-
-    def build_url(url, param, payload):
-    parsed = list(urllib.parse.urlparse(url))
-    query = dict(urllib.parse.parse_qsl(parsed[4]))
-    query[param] = payload
-    parsed[4] = urllib.parse.urlencode(query)
-    return urllib.parse.urlunparse(parsed)
-
-def send_request(url, proxy=None):
-    try:
-        r = requests.get(url, proxies={"http": proxy, "https": proxy}, timeout=10, verify=False)
-        return r
-    except:
-        return None
-
-if __name__ == "__main__":
+    
     print(BANNER)
     args = parse_args()
     run_scan(args.url, args.mode, args.payload, args.threads, args.proxy)
