@@ -185,7 +185,8 @@ def main():
     parser.add_argument("--file", help="File to read (LFI)")
     parser.add_argument("--payload", required=True, help="Payload file path")
     args = parser.parse_args()
-  
+
+    if __name__ == "__main__":
     print(BANNER)
     args = parse_args()
     run_scan(args.url, args.mode, args.payload, args.threads, args.proxy)
