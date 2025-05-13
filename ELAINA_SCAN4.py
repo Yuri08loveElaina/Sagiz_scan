@@ -71,7 +71,6 @@ def scan_payload(url, param, payload, mode, proxy):
             print(f"[SQLi] {target_url}")
             result["vulnerable"] = True
             results.append(result)
-            try_sql_dump(url, param, proxy)
 
     elif mode == "xss" and payload.strip('<>"') in r.text:
         print(f"[XSS] {target_url}")
